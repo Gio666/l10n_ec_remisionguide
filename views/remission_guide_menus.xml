@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="remision_guide_action">
+            <field name="name">Guia de Remision</field>
+            <field name="res_model">account.remission_guide</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Crea tu primera Guia de Remision
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="remision_guide_type_action">
+            <field name="name">Guia de Remision</field>
+            <field name="res_model">account.remission_guide.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Crea los tipos de Guias de Remision
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_remision_guide_menu" name="Guias de Remision"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="remision_guide_menu" name="Guias de Remision"
+                  parent="main_remision_guide_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent remision_guide_menu and *after* its
+             action remision_guide_action -->
+        <menuitem id="remision_guides_menu" name="Guias de remision" parent="remision_guide_menu"
+                  action="remision_guide_action"/>
+
+        <menuitem id="remision_guides_types_menu" name="Tipos de Guias" parent="remision_guide_menu"
+                  action="remision_guide_type_action"/>
+        <!-- Full id location:
+             action="remision_guide.remision_guide_action"
+             It is not required when it is the same module -->
+    </data>
+</odoo>

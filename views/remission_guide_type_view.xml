@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="remissionguide_type_template_tree_view">
+            <field name="name">remissionguide.type.template.tree.view</field>
+            <field name="model">account.remission_guide.type</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <tree string="Tipos de Guias de Remision" editable="1">
+                    <field name="name" string="Tipo"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="remissionguide_type_template_form_view">
+            <field name="name">remissionguide.type.template.form.view</field>
+            <field name="model">account.remission_guide.type</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Tipos de Guias de Remision">
+                    <field name="name" string="Tipo"/>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

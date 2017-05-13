@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="idea_category_list2" model="ir.ui.view">
+        <field name="name">id.category.list2</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet" position="inside">
+                <sheet>
+                    <!---->
+                    <div class="o_horizontal_separator">Guias de Remision</div>
+                    <group>
+                        <field name="remission_guide_id" string="Guias de Remision" readonly="True"/>
+                        <group>
+                            <label for="capacity" string="Capacidad del Vehiculo"/>
+                            <div class="o_row">
+                                <field name="capacity"/>
+                                <span>kg</span>
+                            </div>
+                            <separator colspan="2"/>
+
+                            <label for="products" string="Cantidad de Productos"/>
+                            <div class="o_row">
+                                <field name="products"/>
+                            </div>
+                            <separator colspan="2"/>
+
+                            <label for="total_weigth" string="Peso total de los productos"/>
+                            <div class="o_row">
+                                <field name="total_weigth" readonly="True"/>
+                                <span>kg</span>
+                            </div>
+                            <separator colspan="2"/>
+
+                            <label for="products" string="Capacidad restante en el vehiculo"/>
+                            <div class="o_row">
+                                <field name="capacity_remain" readonly="True"/>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

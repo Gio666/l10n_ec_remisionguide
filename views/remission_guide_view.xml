@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="remissionguide_template_form_view" model="ir.ui.view">
+            <field name="name">remissionguide.template.form.view</field>
+            <field name="model">account.remission_guide</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form >
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed,done"/>
+
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+
+                        <button name="action_generate_remission_guide" type="object" 
+                                attrs="{'invisible':[('state','!=','confirmed')]}" 
+                                string="Generar Doc. Electrónica" 
+                                class="oe_highlight"/>
+
+                        <button name="action_done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet >
+                        <group name="main_info" >
+                            <group colspan="2">
+                                <field name="name" string="Identificador de la guia" attrs="{'invisible':[('name', '=', False)]}"/>
+                                <separator colspan="2"/>
+
+                                <field name="company_id" invisible="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="access_key" invisible="1"/>
+
+                                <field name="authorization_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <separator colspan="2"/>
+
+                                <field name="rise" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <separator colspan="2"/>
+
+                                <field name="contribuyenteEspecial" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <separator colspan="2"/>
+
+
+                                <label for="start_delivery_address" string="Direccion de comienzo de entrega"/>
+                                <div class="o_row">
+                                    <field name="start_delivery_address" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </div>
+                                <separator colspan="2"/>
+
+                                <label for="shipping_type_id" string="Tipo de guia de remision"/>
+                                <div class="o_row">
+                                    <field name="shipping_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </div>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group name="dates">
+                                <separator string="Fechas" colspan="2"/>
+                                <field name="start_delivery_date" string="Fecha de salida" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="end_delivery_date" string="Fecha de llegada" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group name="transfer">
+                                <separator string="Transporte" colspan="2"/>
+                                <field name="reason_for_transfer" string="Motivo de Traslado" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="transporting_truck_id" string="Vehiculo" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       domain="['|','&amp;',('remission_guide_id.start_delivery_date', '&gt;', start_delivery_date),
+                                                            ('remission_guide_id.start_delivery_date', '&gt;', end_delivery_date),
+                                                     ('remission_guide_id', '=', False),('capacity', '>', total_products_weigth)
+                                ]"/>
+                                <field name="route" string="Ruta" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Informacion General" name="general_information">
+                                <group>
+                                    <group name="products">
+                                        <separator string="Productos" colspan="2"/>
+                                        <label for="products" string="Cantidad"/>
+                                        <div class="o_row">
+                                            <field digits="(14, 3)" name="products"/>
+                                        </div>
+                                        <separator colspan="2"/>
+
+                                        <label for="total_products_weigth" string="Peso total"/>
+                                        <div class="o_row">
+                                            <field name="total_products_weigth"/>
+                                            <span>kg</span>
+                                        </div>
+                                    </group>
+                                    <group name="vehicle">
+                                        <separator string="Vehiculo" colspan="2"/>
+                                        <label for="transporting_truck_capacity" string="Capacidad"/>
+                                        <div class="o_row">
+                                            <field digits="(14, 2)" name="transporting_truck_capacity"/>
+                                            <span>kg</span>
+                                        </div>
+                                        <separator colspan="2"/>
+                                        <label for="transporting_truck_total_weigth" string="Peso Total de Productos"/>
+                                        <div class="o_row">
+                                            <field digits="(14, 2)" name="transporting_truck_total_weigth"/>
+                                            <span>kg</span>
+                                        </div>
+                                        <separator colspan="2"/>
+                                        <label for="transporting_truck_capacity_remain" string="Capacidad Restante"/>
+                                        <div class="o_row">
+                                            <field name="transporting_truck_capacity_remain"/>
+                                        </div>
+                                        <separator colspan="2"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Facturas" name="invoices">
+                                <field name="invoices_to_ship" widget="many2many" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                                                                  domain="[('remission_guide_id', '=', False),
+                                                                                           ('state', '=', 'paid')]" >
+                                    <tree>
+                                        <field name="number" string="Factura" />
+                                        <field name="commercial_partner_id" string="Cliente" />
+                                        <field name="customer_street" string="Dirección" />
+                                        <field name="customer_city"  string="Ciudad" />
+                                        <field name="customer_state" string="Estado" />
+                                        <field name="customer_country" string="País" />
+                                        <field name="customer_zip" string="Codigo Postal" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="remissionguide_template_tree_view">
+            <field name="name">remissionguide.template.tree.view</field>
+            <field name="model">account.remission_guide</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <tree string="Lista de Guias de Remision">
+                    <field name="name" string="Guia"/>
+                    <field name="transporting_truck_id" string="Vehiculo"/>
+                    <field name="start_delivery_date" string="Fecha de salida"/>
+                    <field name="end_delivery_date" string="Fecha de llegada"/>
+                    <field name="route" string="Ruta"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="remissionguide_template_search_view">
+            <field name="name">remissionguide.template.search.view</field>
+            <field name="model">account.remission_guide</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="transporting_truck_id"/>
+                    <field name="start_delivery_date"/>
+                    <field name="end_delivery_date"/>
+                    <field name="route"/>
+                    <field name="products"/>
+                    <field name="total_products_weigth"/>
+                    <field name="invoices_to_ship"/>
+                    <field name="start_delivery_address"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

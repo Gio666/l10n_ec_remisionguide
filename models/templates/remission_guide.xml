@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.1.0">
+    <infoTributaria>
+        <ambiente>{{ ambiente }}</ambiente>
+        <tipoEmision>{{ tipoEmision }}</tipoEmision>
+        <razonSocial>{{ razonSocial }}</razonSocial>
+        <nombreComercial>{{ nombreComercial if nombreComercial else '' }}</nombreComercial>
+        <ruc>{{ ruc }}</ruc>
+        <claveAcceso>{{ claveAcceso }}</claveAcceso>
+        <codDoc>{{ codDoc }}</codDoc>
+        <estab>{{ estab }}</estab>
+        <ptoEmi>{{ ptoEmi }}</ptoEmi>
+        <secuencial>{{ secuencial }}</secuencial>
+        <dirMatriz>{{ dirMatriz }}</dirMatriz>
+    </infoTributaria>
+    <infoGuiaRemision>
+        <dirEstablecimiento>{{ dirEstablecimiento if dirEstablecimiento else '' }}</dirEstablecimiento>
+        <dirPartida>{{ dirPartida }}</dirPartida>
+        <razonSocialTransportista>{{ razonSocialTransportista }}</razonSocialTransportista>
+        <tipoIdentificacionTransportista>{{ tipoIdentificacionTransportista }}</tipoIdentificacionTransportista>
+        <rucTransportista>{{ rucTransportista }}</rucTransportista>
+        <rise>{{ rise if rise else '' }}</rise>
+        <obligadoContabilidad>{{ obligadoContabilidad if obligadoContabilidad else '' }}</obligadoContabilidad>
+        <contribuyenteEspecial>{{ contribuyenteEspecial if contribuyenteEspecial else '' }}</contribuyenteEspecial>
+        <fechaIniTransporte>{{ fechaIniTransporte }}</fechaIniTransporte>
+        <fechaFinTransporte>{{ fechaFinTransporte }}</fechaFinTransporte>
+        <placa>{{ placa }}</placa>
+    </infoGuiaRemision>
+    <destinatarios>
+        {%-  for destino in destinatarios  %}
+        <destinatario>
+            <identificacionDestinatario>{{ destino.identificacionDestinatario }}</identificacionDestinatario>
+            <razonSocialDestinatario>{{ destino.razonSocialDestinatario }}</razonSocialDestinatario>
+            <dirDestinatario>{{ destino.dirDestinatario }}</dirDestinatario>
+            <motivoTraslado>{{ destino.motivoTraslado }}</motivoTraslado>
+            <docAduaneroUnico>{{ destino.docAduaneroUnico if destino.docAduaneroUnico else '' }}</docAduaneroUnico>
+            <codEstabDestino>{{ destino.codEstabDestino if destino.codEstabDestino else '' }}</codEstabDestino>
+            <ruta>{{ destino.ruta }}</ruta>
+            <codDocSustento>{{ destino.codDocSustento if destino.codDocSustento else '' }}</codDocSustento>
+            <numDocSustento>{{ destino.numDocSustento if destino.numDocSustento else '' }}</numDocSustento>
+            <numAutDocSustento>{{ destino.numAutDocSustento if destino.numAutDocSustento else '' }}</numAutDocSustento>
+            <fechaEmisionDocSustento>{{ destino.fechaEmisionDocSustento if destino.fechaEmisionDocSustento else '' }}</fechaEmisionDocSustento>
+            <detalles>
+                {%-  for detalle in destino.detalles  %}
+                <detalle>
+                    <codigoInterno>{{ detalle.codigoInterno }}</codigoInterno>
+                    <codigoAdicional>{{ detalle.codigoAdicional }}</codigoAdicional>
+                    <descripcion>{{ detalle.descripcion }}</descripcion>
+                    <cantidad>{{ detalle.cantidad }}</cantidad>
+                    <detallesAdicionales>
+                    </detallesAdicionales>
+                </detalle>
+                {%- endfor %}
+            </detalles>
+        </destinatario>
+        {%- endfor %}
+    </destinatarios>
+    <infoAdicional>
+    </infoAdicional>
+</guiaRemision>
