@@ -11,6 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 from datetime import datetime, timedelta
 from random import choice
 
+from ..xades.sri import DocumentXML
 from ..xades.xades import Xades
 
 from odoo import (api, fields, models)
@@ -172,12 +173,15 @@ class RemissionGuide(models.Model):
         data.update(self._info_guia_remision())
         data.update({'destinatarios':self._info_destinatarios()})
         document = remission_tmpl.render(data)
+        file_pk12 = self.company_id.electronic_signature
+        password = self.company_id.password_electronic_signature
+
         #FIXME hay que probarlo 
         inv_xml = DocumentXML(document)
         inv_xml.validate_xml()
         
         xades = Xades()
-        signed_document = xades.sign(document, self.company_id.electronic_signature, self.company_id.password_electronic_signature)
+        signed_document = xades.sign(document, file_pk12, password)
         ok, errores = inv_xml.send_receipt(signed_document)
         if not ok:
             raise UserError(errores)
