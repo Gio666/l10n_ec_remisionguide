@@ -265,8 +265,8 @@ class RemissionGuide(models.Model):
     def _info_tributaria(self):
         company = self.company_id
         infoTributaria = {
-            'ambiente': 1,
-            'tipoEmision': 1,
+            'ambiente': company.env_service,
+            'tipoEmision': company.emission_code,
             'razonSocial': company.name,
             'nombreComercial': company.name,
             'ruc': company.partner_id.identifier,
