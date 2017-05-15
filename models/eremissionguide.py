@@ -306,7 +306,7 @@ class RemissionGuide(models.Model):
                 'identificacionDestinatario' : invoice.partner_id.identifier,
                 'razonSocialDestinatario' : invoice.partner_id.name,
                 'dirDestinatario' : invoice.partner_id.street,
-                'motivoTraslado' : self.reason_for_transfer,
+                'motivoTraslado' : self.reason_for_transfer.name,
                 'docAduaneroUnico' : invoice.docAduaneroUnico,
                 'codEstabDestino' : invoice.auth_inv_id.serie_entidad, #FIXME no estoy seguro que sea esto
                 'ruta' : self.route,
