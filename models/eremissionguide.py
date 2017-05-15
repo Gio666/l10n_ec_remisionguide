@@ -116,7 +116,7 @@ class RemissionGuide(models.Model):
                                                   readonly=True)
 
     shipping_type_id = fields.Many2one('account.remission_guide.type',
-                                       required=True)
+                                       required=False)
 
     invoices_to_ship = fields.One2many('account.invoice',
                                        'remission_guide_id',

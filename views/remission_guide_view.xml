@@ -52,10 +52,10 @@
                                 </div>
                                 <separator colspan="2"/>
 
-                                <label for="shipping_type_id" string="Tipo de guia de remision"/>
+                                <!--<label for="shipping_type_id" string="Tipo de guia de remision"/>
                                 <div class="o_row">
                                     <field name="shipping_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                </div>
+                                </div>-->
                             </group>
                         </group>
 
@@ -118,8 +118,7 @@
                             </page>
                             <page string="Facturas" name="invoices">
                                 <field name="invoices_to_ship" widget="many2many" attrs="{'readonly': [('state', '!=', 'draft')]}"
-                                                                                  domain="[('remission_guide_id', '=', False),
-                                                                                           ('state', '=', 'paid')]" >
+                                                                                  domain="[('remission_guide_id', '=', False)]" >
                                     <tree>
                                         <field name="number" string="Factura" />
                                         <field name="commercial_partner_id" string="Cliente" />

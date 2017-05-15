@@ -18,7 +18,7 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="remision_guide_type_action">
+        <!--<record model="ir.actions.act_window" id="remision_guide_type_action">
             <field name="name">Guia de Remision</field>
             <field name="res_model">account.remission_guide.type</field>
             <field name="view_type">form</field>
@@ -28,7 +28,7 @@
                     Crea los tipos de Guias de Remision
                 </p>
             </field>
-        </record>
+        </record>-->
 
         <!-- top level menu: no parent -->
         <menuitem id="main_remision_guide_menu" name="Guias de Remision"/>
@@ -42,8 +42,8 @@
         <menuitem id="remision_guides_menu" name="Guias de remision" parent="remision_guide_menu"
                   action="remision_guide_action"/>
 
-        <menuitem id="remision_guides_types_menu" name="Tipos de Guias" parent="remision_guide_menu"
-                  action="remision_guide_type_action"/>
+        <!--<menuitem id="remision_guides_types_menu" name="Tipos de Guias" parent="remision_guide_menu"
+                  action="remision_guide_type_action"/>-->
         <!-- Full id location:
              action="remision_guide.remision_guide_action"
              It is not required when it is the same module -->
