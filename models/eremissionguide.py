@@ -175,7 +175,7 @@ class RemissionGuide(models.Model):
         document = remission_tmpl.render(data)
         file_pk12 = self.company_id.electronic_signature
         password = self.company_id.password_electronic_signature
-
+        
         #FIXME hay que probarlo 
         inv_xml = DocumentXML(document)
         inv_xml.validate_xml()
@@ -311,7 +311,7 @@ class RemissionGuide(models.Model):
                 'codEstabDestino' : invoice.auth_inv_id.serie_entidad, #FIXME no estoy seguro que sea esto
                 'ruta' : self.route,
                 'codDocSustento' : '01', #FIXME 01 para factura
-                'numDocSustento' : '',    #FIXME no se que es
+                'numDocSustento' : invoice.number,    #FIXME no se que es
                 'numAutDocSustento' : '', #FIXME no se que es
                 'fechaEmisionDocSustento' : '', #FIXME no se que es
                 'detalles' : [],
