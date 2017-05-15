@@ -43,10 +43,10 @@
             <detalles>
                 {%-  for detalle in destino.detalles  %}
                 <detalle>
-                    <codigoInterno>{{ detalle.codigoInterno }}</codigoInterno>
-                    <codigoAdicional>{{ detalle.codigoAdicional }}</codigoAdicional>
-                    <descripcion>{{ detalle.descripcion }}</descripcion>
-                    <cantidad>{{ detalle.cantidad }}</cantidad>
+                    <codigoInterno>{{ detalle.codigoInterno if detalle.codigoInterno else '' }}</codigoInterno>
+                    <codigoAdicional>{{ detalle.codigoAdicional if detalle.codigoAdicional else '' }}</codigoAdicional>
+                    <descripcion>{{ detalle.descripcion if detalle.descripcion else '' }}</descripcion>
+                    <cantidad>{{ detalle.cantidad if detalle.cantidad else '' }}</cantidad>
                     <detallesAdicionales>
                     </detallesAdicionales>
                 </detalle>
